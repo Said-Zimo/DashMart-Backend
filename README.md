@@ -88,3 +88,5 @@ It demonstrates how to design a **secure, scalable, and maintainable backend sys
 ---
 
 ## 🎯 Purpose
+
+- This project demonstrates real-world backend architecture and is intended for learning and portfolio use.
