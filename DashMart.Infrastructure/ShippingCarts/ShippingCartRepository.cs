@@ -22,10 +22,10 @@ namespace DashMart.Infrastructure.ShippingCarts
         public void Delete(Cart cart)=> _context.Carts.Remove(cart);
 
         public async Task<Cart?> GetActiveShippingCartByCustomerIdAsync(int customerId, CancellationToken cancellationToken = default)
-        => await _context.Carts.FirstOrDefaultAsync(x=> x.CustomerId == customerId ,cancellationToken);
+        => await _context.Carts.Include(x => x.Customer).FirstOrDefaultAsync(x=> x.CustomerId == customerId ,cancellationToken);
 
         public async Task<Cart?> GetByPublicIdAsync(Guid id, CancellationToken cancellationToken = default)
-        => await _context.Carts.FirstOrDefaultAsync(x=> x.PublicId == id ,cancellationToken);
+        => await _context.Carts.Include(x=> x.Customer).FirstOrDefaultAsync(x=> x.PublicId == id ,cancellationToken);
 
         public async Task<bool> IsExistCart(int customerId, CancellationToken cancellationToken = default)
         => await _context.Carts.AnyAsync(x => x.CustomerId == customerId, cancellationToken);

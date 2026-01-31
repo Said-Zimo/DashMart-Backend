@@ -25,7 +25,7 @@ namespace DashMart.Domain.Products
 
         private Product() { }
 
-        private Product(string name, string? description, string? howToUseNote, Weight grams, Price price, SKU sKU, bool isActive)
+        private Product(string name, string? description, string? howToUseNote,int stockQuantity, Weight grams, Price price, SKU sKU, bool isActive)
         {
 
             DomainValidation.EnsureValidString(name, 50, "Product Name");
@@ -46,7 +46,8 @@ namespace DashMart.Domain.Products
             else
                 howToUseNote = null;
             
-                
+            if(stockQuantity < 0)
+                stockQuantity = 0;
 
             Name = name;
             Description = description;
@@ -55,12 +56,13 @@ namespace DashMart.Domain.Products
             HowToUseNote = howToUseNote;
             SKU = sKU;
             IsActive = isActive;
+            StockQuantity = stockQuantity;
         }
 
-        public static Product Create(string name, string? description, string? howToUseNote, Weight grams, Price price, SKU sku)
+        public static Product Create(string name, string? description, string? howToUseNote,int stockQuantity, Weight grams, Price price, SKU sku)
         {
 
-            return new Product (name, description,howToUseNote, grams, price,sku,true);
+            return new Product (name, description,howToUseNote,stockQuantity, grams, price,sku,true);
         }
 
         public void InsertStockQuantity(int amount)

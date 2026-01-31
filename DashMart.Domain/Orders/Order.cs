@@ -45,7 +45,7 @@ namespace DashMart.Domain.Orders
         {
             DomainValidation.EnsureValidString(houseNo, 15, "House Number");
 
-            if (buildingNo != null) if (string.IsNullOrWhiteSpace(buildingNo))
+            if(!string.IsNullOrWhiteSpace(buildingNo))
                     throw new DomainException("Building Number is not null but is empty"); 
             else BuildingNo = buildingNo;
 
@@ -60,6 +60,7 @@ namespace DashMart.Domain.Orders
             StreetId = streetId;
             HouseNo = houseNo;
             StatusEnum = OrderStatusEnum.Pending ;
+            StatusId = (int)OrderStatusEnum.Pending;
         }
 
         public static Order Create(int customerId , int streetId, string? buildingNo, string houseNo)
@@ -171,9 +172,7 @@ namespace DashMart.Domain.Orders
         };
 
         public bool IsValidOrderStatusTransition(OrderStatusEnum from, OrderStatusEnum to)
-        {
-            return _allowedTransitions.TryGetValue(from, out var current) && (current.Contains(to));
-        }
+            => _allowedTransitions.TryGetValue(from, out var current) && (current.Contains(to));
 
         public void ChangeOrderStatus(DateTime date, OrderStatusEnum to)
         {

@@ -13,6 +13,7 @@ namespace DashMart.Infrastructure.Configurations
 
             builder.ToTable("OrderStatusLogs");
 
+
             builder.HasOne(x => x.Status)
                 .WithMany()
                 .HasForeignKey(x => x.StatusId)

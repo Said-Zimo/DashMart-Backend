@@ -22,7 +22,7 @@ namespace DashMart.Application.Carts.Command
     {
         public async Task<Result<string>> Handle(CreateCartCommand request, CancellationToken cancellationToken)
         {
-            var customer = await customerRepo.GetByPublicIdAsync(request.CustomerId);
+            var customer = await customerRepo.GetByPublicIdAsync(request.CustomerId, cancellationToken);
 
             if (customer == null)
                 return Result<string>.Failure("Customer not found", StatusCodeEnum.NotFound);
@@ -33,7 +33,7 @@ namespace DashMart.Application.Carts.Command
             if (!isOwner && !isUser)
                 return Result<string>.Failure("Access Denied", StatusCodeEnum.Forbidden);
 
-            if (await cartRepo.IsExistCart(customer.Id))
+            if (await cartRepo.IsExistCart(customer.Id, cancellationToken))
                 return Result<string>.Failure($"Cart already existing from customer with Id {request.CustomerId}", StatusCodeEnum.Conflict);
 
             var cart = Cart.Create(customer.Id);

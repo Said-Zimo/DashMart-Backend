@@ -10,7 +10,7 @@ namespace DomainTest
     {
         public static Product CreateForTesting()
         {
-            return Product.Create("test", "test", "test", Weight.Create(100), Price.Create(100), SKU.Create("1234-2634-8547-5487"));
+            return Product.Create("test", "test", "test",0, Weight.Create(100), Price.Create(100), SKU.Create("1234-2634-8547-5487"));
         }
 
     }
@@ -128,7 +128,7 @@ namespace DomainTest
 
 
             // Act 
-            var product = Product.Create(name, description, howToUse, weight, price, sku);
+            var product = Product.Create(name, description, howToUse,0, weight, price, sku);
 
 
             // Assert
@@ -163,7 +163,7 @@ namespace DomainTest
 
             Assert.Throws<DomainException>(() =>
             {
-                Product.Create(name!, null, null, expectedWeight, expectedPrice, expectedSKU);
+                Product.Create(name!, null, null,0, expectedWeight, expectedPrice, expectedSKU);
             });
 
         }

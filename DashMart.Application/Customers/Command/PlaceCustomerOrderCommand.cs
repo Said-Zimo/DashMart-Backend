@@ -46,7 +46,8 @@ namespace DashMart.Application.Customers.Command
 
             var newOrder = Order.Create(customer.Id, selectedAddress.StreetId , selectedAddress.BuildingNo , selectedAddress.HouseNumber);
 
-            if(request.Note != null)
+
+            if(!string.IsNullOrWhiteSpace(request.Note))
                newOrder.SetNote(request.Note);
 
             foreach (var item in shippingCart.CartItems)

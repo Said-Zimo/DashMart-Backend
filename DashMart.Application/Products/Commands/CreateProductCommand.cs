@@ -55,7 +55,7 @@ namespace DashMart.Application.Products.Commands
                 return Result<string>.Failure("Product with this SKU already exists", StatusCodeEnum.Conflict);
             
 
-            var product = Product.Create(request.Name, request.Description, request.HowToUseNote,
+            var product = Product.Create(request.Name, request.Description, request.HowToUseNote, request.StockQuantity,
                  Weight.Create(request.Grams),Price.Create(request.Price),SKU.Create( request.SKU));
 
             productRepo.Add(product);

@@ -8,15 +8,8 @@ namespace DashMart.Api.Controllers.Cart.Commands
 {
     [Route("carts/")]
     [ApiController]
-    public class CartCommandsController : BaseController
+    public class CartCommandsController(IMediator _mediator) : BaseController
     {
-
-        private readonly IMediator _mediator;
-
-        public CartCommandsController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
 
         [HttpPost]
         public async Task<IActionResult> CreateCart([FromBody] CreateCartCommand command, CancellationToken cancellationToken)

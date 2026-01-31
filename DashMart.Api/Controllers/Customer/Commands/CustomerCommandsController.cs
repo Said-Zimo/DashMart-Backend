@@ -50,7 +50,7 @@ namespace DashMart.Api.Controllers.Customer.Commands
 
 
 
-        [HttpPost("{Id}/addresses/{addressId}")]
+        [HttpPost("{Id}/orders/addresses/{addressId}")]
         public async Task<IActionResult> PlaceCustomerOrder(Guid Id, Guid addressId, [FromBody] PlaceCustomerOrderRequest request , CancellationToken cancellationToken)
         {
             var command = new PlaceCustomerOrderCommand(Id, addressId, request.Note);

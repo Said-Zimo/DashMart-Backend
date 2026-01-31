@@ -78,7 +78,7 @@ namespace ApplicationTest.Products.Commands
             int quantity = 1;
             var command = new InsertProductStockQuantityCommand(productId, quantity);
 
-            var product = Product.Create("Test", null, null, Weight.Create(20), Price.Create(20), SKU.Create("564-5658-8587-pf7"));
+            var product = Product.Create("Test", null, null,0, Weight.Create(20), Price.Create(20), SKU.Create("564-5658-8587-pf7"));
 
             _currentUserService.HasPermission(UserPermissionsEnum.UpdateProducts).Returns(true);
             _productRepo.GetByPublicIdAsync(productId, CancellationToken.None).Returns(product);
